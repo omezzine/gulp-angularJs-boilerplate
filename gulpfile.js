@@ -51,6 +51,12 @@ gulp.task('usemin', function () {
       .pipe(gulp.dest('dist/'));
 });
 
+// Clean The Dist folter
+gulp.task('clean-dist', function(){
+	return gulp.src('dist/**', { read: false }) // much faster
+	    .pipe($.rimraf());
+});
+
 // Setup The Watchers
 gulp.task('watch', function(){
 	// SASS Watcher
