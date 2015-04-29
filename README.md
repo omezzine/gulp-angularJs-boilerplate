@@ -11,6 +11,7 @@ This boilerplate uses the latest versions of the following libraries:
 - [SASS](http://sass-lang.com/)
 - [Gulp](http://gulpjs.com/)
 - [Karma](http://karma-runner.github.io/0.12/index.html)
+
 ---
 
 ### Start
