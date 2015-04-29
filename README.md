@@ -10,7 +10,7 @@ This boilerplate uses the latest versions of the following libraries:
 - [AngularJS](http://angularjs.org/)
 - [SASS](http://sass-lang.com/)
 - [Gulp](http://gulpjs.com/)
-
+- [Karma](http://karma-runner.github.io/0.12/index.html)
 ---
 
 ### Start
