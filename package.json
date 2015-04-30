@@ -7,21 +7,22 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start test/karma.conf.js",
+    "e2e": "protractor test/protractor.conf.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/omezzine/seed.git"
   },
   "keywords": [
-    "seed"
+    "gulp", "angularjs", "boilerplate", "²"
   ],
   "author": "mohamed OMEZZINE",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/omezzine/seed/issues"
+    "url": "https://github.com/omezzine/gulp-angularJs-boilerplate/issues"
   },
-  "homepage": "https://github.com/omezzine/seed",
+  "homepage": "https://github.com/omezzine/gulp-angularJs-boilerplate",
   "devDependencies": {
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",

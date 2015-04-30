@@ -5,13 +5,17 @@ var gulp = require('gulp'),
  
 // Setup Paths
 var path = {
+	dist: './dist/',
 	sass: 'app/sass/**/*.scss',
 	css: {
 		directory: 'app/assets/css',
 		files: 'app/assets/**/*.css'
 	},
-	scripts: ['app/app.js', 'app/scripts/**/*.js'],
-	templates: 'app/templates/**/*.html '
+	scripts: ['app/js/app.js', 'app/js/**/*.js'],
+	templates: {
+		src: 'app/templates/**/*.html',
+		dest: this.dist+'templates/'
+	}
 };
 
 // Setup The Server
@@ -48,13 +52,20 @@ gulp.task('usemin', function () {
         //html: [$.minifyHtml({empty: true})],
         js: [$.uglify(), $.rev()]
       }))
-      .pipe(gulp.dest('dist/'));
+      .pipe(gulp.dest(path.dist));
 });
 
 // Clean The Dist folter
 gulp.task('clean-dist', function(){
-	return gulp.src('dist/**', { read: false }) // much faster
+	return gulp.src(path.dist+'**', { read: false }) // much faster
 	    .pipe($.rimraf());
+});
+
+// Copy templates to dist
+gulp.task('copyTpl', function(){
+	return gulp.src(path.templates.src)
+		.pipe($.minifyHtml())
+	    .pipe(gulp.dest(path.templates.dest));
 });
 
 // Setup The Watchers
@@ -66,4 +77,4 @@ gulp.task('watch', function(){
 });
 
 gulp.task('default', ['connect', 'watch']);
-gulp.task('dist', ['lint', 'usemin']);
+gulp.task('dist', ['lint', 'clean-dist', 'usemin', 'copyTpl']);

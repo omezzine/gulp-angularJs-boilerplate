@@ -27,15 +27,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider' , functi
             abstract: true,     
             views: {
                 '@': {
-                    templateUrl: 'scripts/templates/layout.tpl.html'
+                    templateUrl: '../templates/layout.tpl.html'
                     // feel free to add a controller to layout
                 },
                 'header@root': {
-                    templateUrl: 'scripts/templates/shared/header.tpl.html'
+                    templateUrl: '../templates/shared/header.tpl.html'
                     // feel free to add a controller to header
                 },
                 'footer@root': {
-                    templateUrl: 'scripts/templates/shared/footer.tpl.html'
+                    templateUrl: '../templates/shared/footer.tpl.html'
                     // feel free to add a controller to footer
                 }
             }
@@ -45,7 +45,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider' , functi
             url: '/',
             views: {
                 'content@root': {
-                    templateUrl: 'scripts/templates/home.tpl.html',
+                    templateUrl: '../templates/home.tpl.html',
                     controller: 'homeCtrl'
                 }
             }
