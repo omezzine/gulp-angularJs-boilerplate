@@ -5,23 +5,39 @@ var gulp = require('gulp'),
  
 // Setup Paths
 var path = {
+
 	dist: './dist/',
-	sass: 'app/sass/**/*.scss',
+
+	sass: './app/styles/sass/**/*.scss',
+
 	css: {
-		directory: 'app/assets/css',
-		files: 'app/assets/**/*.css'
+		directory: './app/styles/css',
+		files: './app/styles/css/**/*.css'
 	},
-	scripts: ['app/js/app.js', 'app/js/**/*.js'],
+
+	scripts: ['./app/js/app.js', 'app/js/**/*.js'],
+
 	templates: {
-		src: 'app/templates/**/*.html',
-		dest: this.dist+'templates/'
+		src: './app/templates/**/*.html',
+		dest: './dist/templates/'
+	},
+
+	images: {
+		src: './app/images/**',
+		dest: './dist/images/'
+	},
+
+	fonts: {
+		src: './app/fonts/**',
+		dest: './dist/fonts/'
 	}
+
 };
 
 // Setup The Server
 gulp.task('connect', function() {
   $.connect.server({
-    root: 'app',
+    root: './app',
     livereload: true
   });
 });
@@ -49,23 +65,34 @@ gulp.task('usemin', function () {
   return gulp.src('app/index.html')
       .pipe($.usemin({
         css: [$.minifyCss(), 'concat'],
-        //html: [$.minifyHtml({empty: true})],
-        js: [$.uglify(), $.rev()]
+        vendor: [$.uglify(), $.rev()],
+        js: [$.sourcemaps.init(), $.uglify(), $.rev(), $.sourcemaps.write('./')]
       }))
       .pipe(gulp.dest(path.dist));
 });
 
 // Clean The Dist folter
-gulp.task('clean-dist', function(){
-	return gulp.src(path.dist+'**', { read: false }) // much faster
-	    .pipe($.rimraf());
+gulp.task('clean-dist', function(cb){
+	$.rimraf('./dist', cb);
 });
 
 // Copy templates to dist
-gulp.task('copyTpl', function(){
+gulp.task('copyTpls', function(){
 	return gulp.src(path.templates.src)
 		.pipe($.minifyHtml())
 	    .pipe(gulp.dest(path.templates.dest));
+});
+
+// Copy images to dist
+gulp.task('copyImgs', function(){
+	return gulp.src(path.images.src, { read: false })
+	    .pipe(gulp.dest(path.images.dest));
+});
+
+// Copy fonts to dist
+gulp.task('copyFonts', function(){
+	return gulp.src(path.fonts.src, { read: false })
+	    .pipe(gulp.dest(path.fonts.dest));
 });
 
 // Setup The Watchers
@@ -73,8 +100,8 @@ gulp.task('watch', function(){
 	// SASS Watcher
 	gulp.watch(path.sass, ['styles']);
 	// JavaScript Watcher
-	//gulp.watch(path.scripts, ['lint']);
+	gulp.watch(path.scripts, ['lint']);
 });
 
 gulp.task('default', ['connect', 'watch']);
-gulp.task('dist', ['lint', 'clean-dist', 'usemin', 'copyTpl']);
+gulp.task('dist', ['clean-dist', 'usemin', 'copyTpls', 'copyImgs', 'copyFonts']);
