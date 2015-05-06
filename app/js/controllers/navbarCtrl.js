@@ -1,5 +1,6 @@
 'use strict';
 
-controllers.controller('navbarCtrl', function(){
+angular.module('app.controllers')
+	   .controller('navbarCtrl', function(){
 
 	});

@@ -10,9 +10,9 @@ var app = angular.module('app',
     ]);
 
 // Init my modules
-var controllers = angular.module('app.controllers', []);
-var filters = angular.module('app.filters', []);
-var directives = angular.module('app.directives', []);
+angular.module('app.controllers', []);
+angular.module('app.filters', []);
+angular.module('app.directives', []);
 
 // bootstrap angular
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider' , function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -49,10 +49,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider' , functi
                     controller: 'homeCtrl'
                 }
             }
+        })
+        // About page 
+        .state('about', {
+            url: '/about',
+            views: {
+                '': {
+                    templateUrl: '../templates/about.tpl.html'
+                }
+            }
         });
 
     $urlRouterProvider.otherwise('/');
 }]);
 
 // Setup the version
-app.value('version', '1.0.0')
+app.value('version', '1.0.0');
